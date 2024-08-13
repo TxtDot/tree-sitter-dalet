@@ -310,12 +310,22 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "\\\\"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\\"
+                },
+                "named": true,
+                "value": "escape"
               },
               {
-                "type": "STRING",
-                "value": "\\\""
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\""
+                },
+                "named": true,
+                "value": "escape"
               }
             ]
           }
@@ -393,12 +403,22 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "\\\\"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\\"
+                },
+                "named": true,
+                "value": "escape"
               },
               {
-                "type": "STRING",
-                "value": "\\}"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\}"
+                },
+                "named": true,
+                "value": "escape"
               }
             ]
           }
@@ -439,12 +459,22 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "\\\\"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\\"
+                },
+                "named": true,
+                "value": "escape"
               },
               {
-                "type": "STRING",
-                "value": "\\}"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\}"
+                },
+                "named": true,
+                "value": "escape"
               }
             ]
           }
@@ -494,12 +524,22 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "\\\\"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\\"
+                },
+                "named": true,
+                "value": "escape"
               },
               {
-                "type": "STRING",
-                "value": "\\}"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\}"
+                },
+                "named": true,
+                "value": "escape"
               }
             ]
           }
@@ -540,12 +580,22 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "\\\\"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\\"
+                },
+                "named": true,
+                "value": "escape"
               },
               {
-                "type": "STRING",
-                "value": "\\}"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\}"
+                },
+                "named": true,
+                "value": "escape"
               }
             ]
           }
@@ -586,12 +636,22 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "\\\\"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\\\"
+                },
+                "named": true,
+                "value": "escape"
               },
               {
-                "type": "STRING",
-                "value": "\\}"
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "\\}"
+                },
+                "named": true,
+                "value": "escape"
               }
             ]
           }

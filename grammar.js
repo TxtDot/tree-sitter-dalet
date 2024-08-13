@@ -79,8 +79,8 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/[^"\\\n]/), // Match any character except quotes and backslashes
-            "\\\\", // Match escaped backslashes
-            '\\"', // Match escaped quotes
+            alias("\\\\", $.escape), // Match escaped backslashes
+            alias('\\"', $.escape), // Match escaped quotes
           ),
         ),
         '"',
@@ -104,8 +104,8 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
-            "\\\\", // Match escaped backslashes
-            "\\}", // Match escaped }
+            alias("\\\\", $.escape), // Match escaped backslashes
+            alias("\\}", $.escape), // Match escaped }
           ),
         ),
         alias("}", $.symbol),
@@ -117,8 +117,8 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
-            "\\\\", // Match escaped backslashes
-            "\\}", // Match escaped }
+            alias("\\\\", $.escape), // Match escaped backslashes
+            alias("\\}", $.escape), // Match escaped }
           ),
         ),
         alias("}", $.symbol),
@@ -131,8 +131,8 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
-            "\\\\", // Match escaped backslashes
-            "\\}", // Match escaped }
+            alias("\\\\", $.escape), // Match escaped backslashes
+            alias("\\}", $.escape), // Match escaped }
           ),
         ),
         alias("}", $.symbol),
@@ -144,8 +144,8 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
-            "\\\\", // Match escaped backslashes
-            "\\}", // Match escaped }
+            alias("\\\\", $.escape), // Match escaped backslashes
+            alias("\\}", $.escape), // Match escaped }
           ),
         ),
         alias("}", $.symbol),
@@ -157,8 +157,8 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
-            "\\\\", // Match escaped backslashes
-            "\\}", // Match escaped }
+            alias("\\\\", $.escape), // Match escaped backslashes
+            alias("\\}", $.escape), // Match escaped }
           ),
         ),
         alias("}", $.symbol),

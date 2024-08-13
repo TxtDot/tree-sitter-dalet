@@ -6,10 +6,9 @@
   (mlms_number)
 ] @number
 
-[
-  (textual)
-  (text_argument)
-] @string
+(textual) @string.special
+(escape) @string.escape
+(text_argument) @string
 
 (table_parser_id) @keyword
 

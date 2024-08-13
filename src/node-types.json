@@ -70,6 +70,10 @@
       "required": true,
       "types": [
         {
+          "type": "escape",
+          "named": true
+        },
+        {
           "type": "mlms_number",
           "named": true
         },
@@ -88,6 +92,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "escape",
+          "named": true
+        },
         {
           "type": "symbol",
           "named": true
@@ -109,6 +117,10 @@
       "required": true,
       "types": [
         {
+          "type": "escape",
+          "named": true
+        },
+        {
           "type": "symbol",
           "named": true
         }
@@ -123,6 +135,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "escape",
+          "named": true
+        },
         {
           "type": "symbol",
           "named": true
@@ -177,6 +193,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "escape",
+          "named": true
+        },
         {
           "type": "symbol",
           "named": true
@@ -234,7 +254,17 @@
   {
     "type": "text_argument",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "text_body",
@@ -295,23 +325,15 @@
     "named": false
   },
   {
-    "type": "\\\"",
-    "named": false
-  },
-  {
-    "type": "\\\\",
-    "named": false
-  },
-  {
-    "type": "\\}",
-    "named": false
-  },
-  {
     "type": "comment",
     "named": true
   },
   {
     "type": "empty_line",
+    "named": true
+  },
+  {
+    "type": "escape",
     "named": true
   },
   {
