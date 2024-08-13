@@ -88,7 +88,8 @@ module.exports = grammar({
 
     table_syntax: ($) =>
       seq(
-        alias("{> table", $.table_open),
+        alias("{> ", $.custom_parser_open),
+        alias("table", $.table_parser_id),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -152,7 +153,7 @@ module.exports = grammar({
         alias("}", $.multiline_close),
       ),
 
-    text_body: ($) => seq(":", /[^\n]+/),
+    text_body: ($) => seq(alias(":", $.text_body_open), /[^\n]+/),
 
     text_tag: ($) => token(prec(-1, /[^\n]+/)),
   },

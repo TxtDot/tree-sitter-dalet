@@ -323,10 +323,19 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": "{> table"
+            "value": "{> "
           },
           "named": true,
-          "value": "table_open"
+          "value": "custom_parser_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "table"
+          },
+          "named": true,
+          "value": "table_parser_id"
         },
         {
           "type": "REPEAT",
@@ -559,8 +568,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": ":"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":"
+          },
+          "named": true,
+          "value": "text_body_open"
         },
         {
           "type": "PATTERN",

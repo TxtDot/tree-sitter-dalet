@@ -152,11 +152,15 @@
       "required": true,
       "types": [
         {
+          "type": "custom_parser_open",
+          "named": true
+        },
+        {
           "type": "multiline_close",
           "named": true
         },
         {
-          "type": "table_open",
+          "type": "table_parser_id",
           "named": true
         }
       ]
@@ -170,7 +174,17 @@
   {
     "type": "text_body",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "text_body_open",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "textual",
@@ -216,10 +230,6 @@
     "named": false
   },
   {
-    "type": ":",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },
@@ -252,6 +262,10 @@
     "named": true
   },
   {
+    "type": "custom_parser_open",
+    "named": true
+  },
+  {
     "type": "empty_line",
     "named": true
   },
@@ -280,11 +294,15 @@
     "named": true
   },
   {
-    "type": "table_open",
+    "type": "table_parser_id",
     "named": true
   },
   {
     "type": "tag",
+    "named": true
+  },
+  {
+    "type": "text_body_open",
     "named": true
   },
   {
