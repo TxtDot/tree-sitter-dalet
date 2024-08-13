@@ -5,74 +5,76 @@ module.exports = grammar({
   name: "daleth",
 
   rules: {
-    // TODO: add the actual grammar rules
-    source_file: ($) => repeat($.token),
+    // The top-level rule
+    source_file: ($) => repeat($._token),
 
-    token: ($) =>
-      choice(
-        $.comment,
-        $.symbol_open,
-        $.tag,
-        $.symbol_close,
-        $.argument,
-        $.textual,
-      ),
+    _token: ($) =>
+      choice($.empty_line, $.comment, $.symbol, $.tag, $.argument, $.textual),
 
-    comment: ($) => seq("#", /.*/),
+    // Define each of the tokens from the Chumsky parser
 
-    // Tag keywords
+    comment: ($) => token(prec(0, seq("#", /[^\n]*/))),
+    empty_line: ($) => token(prec(0, seq(/\n\s*\n/))),
+
+    symbol: ($) => choice("[[", "]]", "[", "]"),
+
     tag: ($) =>
-      choice(
-        "el",
-        "h",
-        "p",
-        "br",
-        "ul",
-        "ol",
-        "row",
-        "link",
-        "navlink",
-        "btn",
-        "navbtn",
-        "img",
-        "table",
-        "trow",
-        "tprow",
-        "hr",
-        "b",
-        "i",
-        "bq",
-        "footlnk",
-        "footn",
-        "a",
-        "s",
-        "sup",
-        "sub",
-        "disc",
-        "block",
-        "carousel",
-        "code",
-        "pre",
-        "meta",
+      token(
+        prec(
+          1,
+          choice(
+            "el",
+            "h",
+            "p",
+            "br",
+            "ul",
+            "ol",
+            "row",
+            "link",
+            "navlink",
+            "btn",
+            "navbtn",
+            "img",
+            "table",
+            "trow",
+            "tprow",
+            "hr",
+            "b",
+            "i",
+            "bq",
+            "footlnk",
+            "footn",
+            "a",
+            "s",
+            "sup",
+            "sub",
+            "disc",
+            "block",
+            "carousel",
+            "code",
+            "pre",
+            "meta",
+          ),
+        ),
       ),
 
-    // Symbols
-    symbol_open: ($) => choice("[[", "["),
-    symbol_close: ($) => choice("]]", "]"),
+    argument: ($) => choice($.number_argument, $.text_argument),
 
-    // Argument
-    argument: ($) => choice($.string_argument, $.number_argument),
+    number_argument: ($) => /\d+/,
 
-    string_argument: ($) =>
+    text_argument: ($) =>
       seq(
         '"',
-        repeat(choice($.string_arg_escape_sequence, $.string_arg_content)),
-        token.immediate('"'),
+        repeat(
+          choice(
+            token.immediate(/[^"\\\n]/), // Match any character except quotes and backslashes
+            "\\\\", // Match escaped backslashes
+            '\\"', // Match escaped quotes
+          ),
+        ),
+        '"',
       ),
 
-    number_argument: (_) => token.immediate(/d+/),
-
-    // Textual
     textual: ($) =>
       choice(
         $.table_syntax,
@@ -84,45 +86,74 @@ module.exports = grammar({
         $.text_tag,
       ),
 
-    text_body: ($) => seq($.text_body_open_sep, $.one_line_body, "\n"),
-    text_tag: ($) => $.one_line_body,
-    paragraph: ($) =>
-      seq($.paragraph_open_sep, $.multiline_body, $.multiline_close_sep),
     table_syntax: ($) =>
-      seq($.table_open_sep, $.multiline_body, $.multiline_close_sep),
-    mltext: ($) =>
-      seq($.multiline_open_sep, $.multiline_body, $.multiline_close_sep),
+      seq(
+        alias("{> table", $.table_open),
+        repeat(
+          choice(
+            token.immediate(/[^}\\]/), // Match any character except } and \
+            "\\\\", // Match escaped backslashes
+            "\\}", // Match escaped }
+          ),
+        ),
+        alias("}", $.multiline_close),
+      ),
+
+    paragraph: ($) =>
+      seq(
+        alias("{-", $.paragraph_open),
+        repeat(
+          choice(
+            token.immediate(/[^}\\]/), // Match any character except } and \
+            "\\\\", // Match escaped backslashes
+            "\\}", // Match escaped }
+          ),
+        ),
+        alias("}", $.multiline_close),
+      ),
+
     mlmstext: ($) =>
       seq(
-        $.multiline_min_spaces_open_sep,
-        $.multiline_body,
-        $.multiline_close_sep,
+        alias("{~", $.mlms_open),
+        alias(/\d+/, $.mlms_number),
+        repeat(
+          choice(
+            token.immediate(/[^}\\]/), // Match any character except } and \
+            "\\\\", // Match escaped backslashes
+            "\\}", // Match escaped }
+          ),
+        ),
+        alias("}", $.multiline_close),
       ),
+
     rmltext: ($) =>
-      seq($.multiline_raw_open_sep, $.multiline_body, $.multiline_close_sep),
+      seq(
+        alias("{#", $.rml_open),
+        repeat(
+          choice(
+            token.immediate(/[^}\\]/), // Match any character except } and \
+            "\\\\", // Match escaped backslashes
+            "\\}", // Match escaped }
+          ),
+        ),
+        alias("}", $.multiline_close),
+      ),
 
-    // Separators
-    text_body_open_sep: ($) => token.immediate(":"),
-    paragraph_open_sep: ($) => token.immediate("{-"),
-    table_open_sep: ($) => token.immediate("{> table"),
-    multiline_open_sep: ($) => token.immediate("{"),
-    multiline_min_spaces_open_sep: ($) => token.immediate("{~"),
-    multiline_raw_open_sep: ($) => token.immediate("{#"),
-    multiline_close_sep: ($) => token.immediate("}"),
+    mltext: ($) =>
+      seq(
+        alias("{", $.multiline_open),
+        repeat(
+          choice(
+            token.immediate(/[^}\\]/), // Match any character except } and \
+            "\\\\", // Match escaped backslashes
+            "\\}", // Match escaped }
+          ),
+        ),
+        alias("}", $.multiline_close),
+      ),
 
-    // Bodies
-    one_line_body: (_) => token.immediate(prec(1, /[^\n]+/)),
-    multiline_body: ($) =>
-      repeat1(choice($.multiline_escape_sequence, $.multiline_content)),
+    text_body: ($) => seq(":", /[^\n]+/),
 
-    // Content
-    string_arg_content: (_) => token.immediate(prec(1, /[^\"\\\n]+/)),
-    multiline_content: (_) => token.immediate(prec(1, /[^\}\\]+/)),
-    table_content: (_) => token.immediate(prec(1, /[^\|\]\\]+/)),
-
-    // Escapes
-    string_arg_escape_sequence: (_) => token.immediate(/\\[\"\\]/),
-    multiline_escape_sequence: (_) => token.immediate(/\\[\}\\]/),
-    table_escape_sequence: (_) => token.immediate(/\\[\|\]\\]/),
+    text_tag: ($) => token(prec(-1, /[^\n]+/)),
   },
 });
