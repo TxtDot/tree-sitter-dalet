@@ -25,9 +25,13 @@ module.exports = grammar({
     empty_line: ($) => token(prec(0, seq(/\n\s*\n/))),
 
     el_tags: ($) =>
-      seq(alias("[[", $.symbol), repeat($._token), alias("]]", $.symbol)),
+      seq(
+        alias("[[", $.symbol_open),
+        repeat($._token),
+        alias("]]", $.symbol_close),
+      ),
     tags_body: ($) =>
-      seq(alias("[", $.symbol), repeat($._token), alias("]", $.symbol)),
+      seq(alias("[", $.symbol), repeat($._token), alias("]", $.symbol_close)),
 
     tag: ($) =>
       token(
@@ -99,7 +103,7 @@ module.exports = grammar({
 
     table_syntax: ($) =>
       seq(
-        alias("{> ", $.symbol),
+        alias("{> ", $.symbol_open),
         alias("table", $.table_parser_id),
         repeat(
           choice(
@@ -108,12 +112,12 @@ module.exports = grammar({
             alias("\\}", $.escape), // Match escaped }
           ),
         ),
-        alias("}", $.symbol),
+        alias("}", $.symbol_close),
       ),
 
     paragraph: ($) =>
       seq(
-        alias("{-", $.symbol),
+        alias("{-", $.symbol_open),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -121,12 +125,12 @@ module.exports = grammar({
             alias("\\}", $.escape), // Match escaped }
           ),
         ),
-        alias("}", $.symbol),
+        alias("}", $.symbol_close),
       ),
 
     mlmstext: ($) =>
       seq(
-        alias("{~", $.symbol),
+        alias("{~", $.symbol_open),
         alias(/\d+/, $.mlms_number),
         repeat(
           choice(
@@ -135,12 +139,12 @@ module.exports = grammar({
             alias("\\}", $.escape), // Match escaped }
           ),
         ),
-        alias("}", $.symbol),
+        alias("}", $.symbol_close),
       ),
 
     rmltext: ($) =>
       seq(
-        alias("{#", $.symbol),
+        alias("{#", $.symbol_open),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -148,12 +152,12 @@ module.exports = grammar({
             alias("\\}", $.escape), // Match escaped }
           ),
         ),
-        alias("}", $.symbol),
+        alias("}", $.symbol_close),
       ),
 
     mltext: ($) =>
       seq(
-        alias("{", $.symbol),
+        alias("{", $.symbol_open),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -161,7 +165,7 @@ module.exports = grammar({
             alias("\\}", $.escape), // Match escaped }
           ),
         ),
-        alias("}", $.symbol),
+        alias("}", $.symbol_close),
       ),
 
     text_body: ($) => seq(alias(":", $.text_body_open), /[^\n]+/),

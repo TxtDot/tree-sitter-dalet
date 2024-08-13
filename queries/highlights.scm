@@ -1,10 +1,11 @@
 (comment) @comment
-(tag) @tag
-
 [
   (number_argument)
-  (mlms_number)
-] @number
+  (tag)
+] @tag
+
+
+(mlms_number) @number
 
 (textual) @string.special
 (escape) @string.escape
@@ -12,6 +13,9 @@
 
 (table_parser_id) @keyword
 
-(symbol) @punctuation.bracket
+[
+  (symbol_open)
+  (symbol_close)
+] @punctuation.bracket
 
 (text_body_open) @punctuation.delimiter
