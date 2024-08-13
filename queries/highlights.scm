@@ -13,16 +13,6 @@
 
 (table_parser_id) @keyword
 
-
-[
-  (symbol)
-
-  (custom_parser_open)
-  (paragraph_open)
-  (mlms_open)
-  (rml_open)
-  (multiline_open)
-  (multiline_close)
-] @punctuation.bracket
+(symbol) @punctuation.bracket
 
 (text_body_open) @punctuation.delimiter

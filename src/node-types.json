@@ -19,6 +19,49 @@
     }
   },
   {
+    "type": "el_tags",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "el_tags",
+          "named": true
+        },
+        {
+          "type": "empty_line",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "tags_body",
+          "named": true
+        },
+        {
+          "type": "textual",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "mlmstext",
     "named": true,
     "fields": {},
@@ -31,11 +74,7 @@
           "named": true
         },
         {
-          "type": "mlms_open",
-          "named": true
-        },
-        {
-          "type": "multiline_close",
+          "type": "symbol",
           "named": true
         }
       ]
@@ -50,11 +89,7 @@
       "required": true,
       "types": [
         {
-          "type": "multiline_close",
-          "named": true
-        },
-        {
-          "type": "multiline_open",
+          "type": "symbol",
           "named": true
         }
       ]
@@ -74,11 +109,7 @@
       "required": true,
       "types": [
         {
-          "type": "multiline_close",
-          "named": true
-        },
-        {
-          "type": "paragraph_open",
+          "type": "symbol",
           "named": true
         }
       ]
@@ -93,11 +124,7 @@
       "required": true,
       "types": [
         {
-          "type": "multiline_close",
-          "named": true
-        },
-        {
-          "type": "rml_open",
+          "type": "symbol",
           "named": true
         }
       ]
@@ -120,6 +147,68 @@
           "named": true
         },
         {
+          "type": "el_tags",
+          "named": true
+        },
+        {
+          "type": "empty_line",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "tags_body",
+          "named": true
+        },
+        {
+          "type": "textual",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_syntax",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "table_parser_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tags_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "el_tags",
+          "named": true
+        },
+        {
           "type": "empty_line",
           "named": true
         },
@@ -132,35 +221,11 @@
           "named": true
         },
         {
+          "type": "tags_body",
+          "named": true
+        },
+        {
           "type": "textual",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "symbol",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "table_syntax",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "custom_parser_open",
-          "named": true
-        },
-        {
-          "type": "multiline_close",
-          "named": true
-        },
-        {
-          "type": "table_parser_id",
           "named": true
         }
       ]
@@ -230,14 +295,6 @@
     "named": false
   },
   {
-    "type": "[",
-    "named": false
-  },
-  {
-    "type": "[[",
-    "named": false
-  },
-  {
     "type": "\\\"",
     "named": false
   },
@@ -250,19 +307,7 @@
     "named": false
   },
   {
-    "type": "]",
-    "named": false
-  },
-  {
-    "type": "]]",
-    "named": false
-  },
-  {
     "type": "comment",
-    "named": true
-  },
-  {
-    "type": "custom_parser_open",
     "named": true
   },
   {
@@ -274,23 +319,7 @@
     "named": true
   },
   {
-    "type": "mlms_open",
-    "named": true
-  },
-  {
-    "type": "multiline_close",
-    "named": true
-  },
-  {
-    "type": "multiline_open",
-    "named": true
-  },
-  {
-    "type": "paragraph_open",
-    "named": true
-  },
-  {
-    "type": "rml_open",
+    "type": "symbol",
     "named": true
   },
   {

@@ -9,14 +9,25 @@ module.exports = grammar({
     source_file: ($) => repeat($._token),
 
     _token: ($) =>
-      choice($.empty_line, $.comment, $.symbol, $.tag, $.argument, $.textual),
+      choice(
+        $.empty_line,
+        $.comment,
+        $.el_tags,
+        $.tags_body,
+        $.tag,
+        $.argument,
+        $.textual,
+      ),
 
     // Define each of the tokens from the Chumsky parser
 
     comment: ($) => token(prec(0, seq("#", /[^\n]*/))),
     empty_line: ($) => token(prec(0, seq(/\n\s*\n/))),
 
-    symbol: ($) => choice("[[", "]]", "[", "]"),
+    el_tags: ($) =>
+      seq(alias("[[", $.symbol), repeat($._token), alias("]]", $.symbol)),
+    tags_body: ($) =>
+      seq(alias("[", $.symbol), repeat($._token), alias("]", $.symbol)),
 
     tag: ($) =>
       token(
@@ -88,7 +99,7 @@ module.exports = grammar({
 
     table_syntax: ($) =>
       seq(
-        alias("{> ", $.custom_parser_open),
+        alias("{> ", $.symbol),
         alias("table", $.table_parser_id),
         repeat(
           choice(
@@ -97,12 +108,12 @@ module.exports = grammar({
             "\\}", // Match escaped }
           ),
         ),
-        alias("}", $.multiline_close),
+        alias("}", $.symbol),
       ),
 
     paragraph: ($) =>
       seq(
-        alias("{-", $.paragraph_open),
+        alias("{-", $.symbol),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -110,12 +121,12 @@ module.exports = grammar({
             "\\}", // Match escaped }
           ),
         ),
-        alias("}", $.multiline_close),
+        alias("}", $.symbol),
       ),
 
     mlmstext: ($) =>
       seq(
-        alias("{~", $.mlms_open),
+        alias("{~", $.symbol),
         alias(/\d+/, $.mlms_number),
         repeat(
           choice(
@@ -124,12 +135,12 @@ module.exports = grammar({
             "\\}", // Match escaped }
           ),
         ),
-        alias("}", $.multiline_close),
+        alias("}", $.symbol),
       ),
 
     rmltext: ($) =>
       seq(
-        alias("{#", $.rml_open),
+        alias("{#", $.symbol),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -137,12 +148,12 @@ module.exports = grammar({
             "\\}", // Match escaped }
           ),
         ),
-        alias("}", $.multiline_close),
+        alias("}", $.symbol),
       ),
 
     mltext: ($) =>
       seq(
-        alias("{", $.multiline_open),
+        alias("{", $.symbol),
         repeat(
           choice(
             token.immediate(/[^}\\]/), // Match any character except } and \
@@ -150,7 +161,7 @@ module.exports = grammar({
             "\\}", // Match escaped }
           ),
         ),
-        alias("}", $.multiline_close),
+        alias("}", $.symbol),
       ),
 
     text_body: ($) => seq(alias(":", $.text_body_open), /[^\n]+/),
