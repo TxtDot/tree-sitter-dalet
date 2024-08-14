@@ -7,7 +7,10 @@
 
 (mlms_number) @number
 
-(textual) @string.special
+[
+  (textual)
+  (text_tag)
+] @string.special
 (escape) @string.escape
 (text_argument) @string
 
@@ -18,4 +21,7 @@
   (symbol_close)
 ] @punctuation.bracket
 
-(text_body_open) @punctuation.delimiter
+[
+  (text_body_open)
+  (text_tag_open)
+] @punctuation.delimiter

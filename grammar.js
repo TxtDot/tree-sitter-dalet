@@ -5,7 +5,6 @@ module.exports = grammar({
   name: "daleth",
 
   rules: {
-    // The top-level rule
     source_file: ($) => repeat($._token),
 
     _token: ($) =>
@@ -17,12 +16,12 @@ module.exports = grammar({
         $.tag,
         $.argument,
         $.textual,
+        $.text_tag,
+        $.code,
       ),
 
-    // Define each of the tokens from the Chumsky parser
-
-    comment: ($) => token(prec(0, seq("#", /[^\n]*/))),
-    empty_line: ($) => token(prec(0, seq(/\n\s*\n/))),
+    comment: ($) => seq("#", /[^\n]*/),
+    empty_line: ($) => seq(/\n\s*\n/),
 
     el_tags: ($) =>
       seq(
@@ -33,44 +32,41 @@ module.exports = grammar({
     tags_body: ($) =>
       seq(alias("[", $.symbol), repeat($._token), alias("]", $.symbol_close)),
 
+    code: ($) => prec(1, seq(alias("code", $.tag), $.text_argument, $.textual)),
+
     tag: ($) =>
-      token(
-        prec(
-          1,
-          choice(
-            "el",
-            "h",
-            "p",
-            "br",
-            "ul",
-            "ol",
-            "row",
-            "link",
-            "navlink",
-            "btn",
-            "navbtn",
-            "img",
-            "table",
-            "trow",
-            "tprow",
-            "hr",
-            "b",
-            "i",
-            "bq",
-            "footlnk",
-            "footn",
-            "a",
-            "s",
-            "sup",
-            "sub",
-            "disc",
-            "block",
-            "carousel",
-            "code",
-            "pre",
-            "meta",
-          ),
-        ),
+      choice(
+        "el",
+        "h",
+        "p",
+        "br",
+        "ul",
+        "ol",
+        "row",
+        "link",
+        "navlink",
+        "btn",
+        "navbtn",
+        "img",
+        "table",
+        "trow",
+        "tprow",
+        "hr",
+        "b",
+        "i",
+        "bq",
+        "footlnk",
+        "footn",
+        "a",
+        "s",
+        "sup",
+        "sub",
+        "disc",
+        "block",
+        "carousel",
+        "code",
+        "pre",
+        "meta",
       ),
 
     argument: ($) => choice($.number_argument, $.text_argument),
@@ -80,96 +76,114 @@ module.exports = grammar({
     text_argument: ($) =>
       seq(
         '"',
-        repeat(
-          choice(
-            token.immediate(/[^"\\\n]/), // Match any character except quotes and backslashes
-            alias("\\\\", $.escape), // Match escaped backslashes
-            alias('\\"', $.escape), // Match escaped quotes
+        alias(
+          repeat(
+            choice(
+              token.immediate(/[^"\\\n]/), // Match any character except quotes and backslashes
+              alias("\\\\", $.escape), // Match escaped backslashes
+              alias('\\"', $.escape), // Match escaped quotes
+            ),
           ),
+          $.text_argument_value,
         ),
         '"',
       ),
 
     textual: ($) =>
       choice(
-        $.table_syntax,
-        $.paragraph,
-        $.mlmstext,
-        $.rmltext,
-        $.mltext,
-        $.text_body,
-        $.text_tag,
+        $._table_syntax,
+        $._paragraph,
+        $._mlmstext,
+        $._rmltext,
+        $._mltext,
+        $._text_body,
       ),
 
-    table_syntax: ($) =>
+    _table_syntax: ($) =>
       seq(
         alias("{> ", $.symbol_open),
         alias("table", $.table_parser_id),
-        repeat(
-          choice(
-            token.immediate(/[^}\\]/), // Match any character except } and \
-            alias("\\\\", $.escape), // Match escaped backslashes
-            alias("\\}", $.escape), // Match escaped }
+        alias(
+          repeat(
+            choice(
+              token.immediate(/[^}\\]/), // Match any character except } and \
+              alias("\\\\", $.escape), // Match escaped backslashes
+              alias("\\}", $.escape), // Match escaped }
+            ),
           ),
+          $.textual_value,
         ),
         alias("}", $.symbol_close),
       ),
 
-    paragraph: ($) =>
+    _paragraph: ($) =>
       seq(
         alias("{-", $.symbol_open),
-        repeat(
-          choice(
-            token.immediate(/[^}\\]/), // Match any character except } and \
-            alias("\\\\", $.escape), // Match escaped backslashes
-            alias("\\}", $.escape), // Match escaped }
+        alias(
+          repeat(
+            choice(
+              token.immediate(/[^}\\]/), // Match any character except } and \
+              alias("\\\\", $.escape), // Match escaped backslashes
+              alias("\\}", $.escape), // Match escaped }
+            ),
           ),
+          $.textual_value,
         ),
         alias("}", $.symbol_close),
       ),
 
-    mlmstext: ($) =>
+    _mlmstext: ($) =>
       seq(
         alias("{~", $.symbol_open),
         alias(/\d+/, $.mlms_number),
-        repeat(
-          choice(
-            token.immediate(/[^}\\]/), // Match any character except } and \
-            alias("\\\\", $.escape), // Match escaped backslashes
-            alias("\\}", $.escape), // Match escaped }
+        alias(
+          repeat(
+            choice(
+              token.immediate(/[^}\\]/), // Match any character except } and \
+              alias("\\\\", $.escape), // Match escaped backslashes
+              alias("\\}", $.escape), // Match escaped }
+            ),
           ),
+          $.textual_value,
         ),
         alias("}", $.symbol_close),
       ),
 
-    rmltext: ($) =>
+    _rmltext: ($) =>
       seq(
         alias("{#", $.symbol_open),
-        repeat(
-          choice(
-            token.immediate(/[^}\\]/), // Match any character except } and \
-            alias("\\\\", $.escape), // Match escaped backslashes
-            alias("\\}", $.escape), // Match escaped }
+        alias(
+          repeat(
+            choice(
+              token.immediate(/[^}\\]/), // Match any character except } and \
+              alias("\\\\", $.escape), // Match escaped backslashes
+              alias("\\}", $.escape), // Match escaped }
+            ),
           ),
+          $.textual_value,
         ),
         alias("}", $.symbol_close),
       ),
 
-    mltext: ($) =>
+    _mltext: ($) =>
       seq(
         alias("{", $.symbol_open),
-        repeat(
-          choice(
-            token.immediate(/[^}\\]/), // Match any character except } and \
-            alias("\\\\", $.escape), // Match escaped backslashes
-            alias("\\}", $.escape), // Match escaped }
+        alias(
+          repeat(
+            choice(
+              token.immediate(/[^}\\]/), // Match any character except } and \
+              alias("\\\\", $.escape), // Match escaped backslashes
+              alias("\\}", $.escape), // Match escaped }
+            ),
           ),
+          $.textual_value,
         ),
         alias("}", $.symbol_close),
       ),
 
-    text_body: ($) => seq(alias(":", $.text_body_open), /[^\n]+/),
+    _text_body: ($) =>
+      seq(alias(":", $.text_body_open), alias(/[^\n]+/, $.textual_value)),
 
-    text_tag: ($) => token(prec(-1, /[^\n]+/)),
+    text_tag: ($) => seq(alias("-", $.text_tag_open), /[^\n]+/),
   },
 });
