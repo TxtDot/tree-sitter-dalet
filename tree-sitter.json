@@ -6,10 +6,7 @@
       "camelcase": "Dalet",
       "title": "Dalet",
       "scope": "source.dalet",
-      "file-types": [
-        "dtss",
-        "dtml"
-      ],
+      "file-types": ["dss", "dm"],
       "injection-regex": "^dalet$",
       "class-name": "TreeSitterDalet"
     }

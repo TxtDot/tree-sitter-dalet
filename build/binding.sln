@@ -1,10 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_addon_api_except", "node_modules\.pnpm\node-addon-api@8.3.1\node_modules\node-addon-api\node_addon_api_except.vcxproj", "{CD5436C2-0AB2-2F99-C479-7DDA95FC3644}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_addon_api_except", "node_modules\.pnpm\node-addon-api@8.3.1\node_modules\node-addon-api\node_addon_api_except.vcxproj", "{17B26AE0-E18B-6D82-F206-2D5795525725}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_sitter_dalet_binding", "tree_sitter_dalet_binding.vcxproj", "{1D9E0FD3-E465-CD42-9CE3-15BAA64AE2C4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_sitter_dalet_binding", "tree_sitter_dalet_binding.vcxproj", "{43FFA19A-2893-F799-060B-9421F95FAFF0}"
 	ProjectSection(ProjectDependencies) = postProject
-		{CD5436C2-0AB2-2F99-C479-7DDA95FC3644} = {CD5436C2-0AB2-2F99-C479-7DDA95FC3644}
+		{17B26AE0-E18B-6D82-F206-2D5795525725} = {17B26AE0-E18B-6D82-F206-2D5795525725}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(node_modules)", "..\node_modules", "{9D350B9E-06FB-960D-859F-B43C9597383A}"
@@ -23,14 +23,14 @@ Global
 		Debug|x64 = Debug|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D9E0FD3-E465-CD42-9CE3-15BAA64AE2C4}.Release|x64.ActiveCfg = Release|x64
-		{1D9E0FD3-E465-CD42-9CE3-15BAA64AE2C4}.Release|x64.Build.0 = Release|x64
-		{1D9E0FD3-E465-CD42-9CE3-15BAA64AE2C4}.Debug|x64.ActiveCfg = Debug|x64
-		{1D9E0FD3-E465-CD42-9CE3-15BAA64AE2C4}.Debug|x64.Build.0 = Debug|x64
-		{CD5436C2-0AB2-2F99-C479-7DDA95FC3644}.Release|x64.ActiveCfg = Release|x64
-		{CD5436C2-0AB2-2F99-C479-7DDA95FC3644}.Release|x64.Build.0 = Release|x64
-		{CD5436C2-0AB2-2F99-C479-7DDA95FC3644}.Debug|x64.ActiveCfg = Debug|x64
-		{CD5436C2-0AB2-2F99-C479-7DDA95FC3644}.Debug|x64.Build.0 = Debug|x64
+		{17B26AE0-E18B-6D82-F206-2D5795525725}.Release|x64.ActiveCfg = Release|x64
+		{17B26AE0-E18B-6D82-F206-2D5795525725}.Release|x64.Build.0 = Release|x64
+		{17B26AE0-E18B-6D82-F206-2D5795525725}.Debug|x64.ActiveCfg = Debug|x64
+		{17B26AE0-E18B-6D82-F206-2D5795525725}.Debug|x64.Build.0 = Debug|x64
+		{43FFA19A-2893-F799-060B-9421F95FAFF0}.Release|x64.ActiveCfg = Release|x64
+		{43FFA19A-2893-F799-060B-9421F95FAFF0}.Release|x64.Build.0 = Release|x64
+		{43FFA19A-2893-F799-060B-9421F95FAFF0}.Debug|x64.ActiveCfg = Debug|x64
+		{43FFA19A-2893-F799-060B-9421F95FAFF0}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +40,6 @@ Global
 		{DD31A95F-7A03-571E-34FA-E06DEC76DFD0} = {B7C2E3AA-093A-B65C-48E3-CDB279AA97C9}
 		{DC9316CE-88E7-F163-56A4-1B8AB2B66BEA} = {DD31A95F-7A03-571E-34FA-E06DEC76DFD0}
 		{0C8504DC-3BFF-8554-5ED7-C18E981433F4} = {DC9316CE-88E7-F163-56A4-1B8AB2B66BEA}
-		{CD5436C2-0AB2-2F99-C479-7DDA95FC3644} = {0C8504DC-3BFF-8554-5ED7-C18E981433F4}
+		{17B26AE0-E18B-6D82-F206-2D5795525725} = {0C8504DC-3BFF-8554-5ED7-C18E981433F4}
 	EndGlobalSection
 EndGlobal

@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1D9E0FD3-E465-CD42-9CE3-15BAA64AE2C4}</ProjectGuid>
+    <ProjectGuid>{43FFA19A-2893-F799-060B-9421F95FAFF0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>tree_sitter_dalet_binding</RootNamespace>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
@@ -149,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="node_modules\.pnpm\node-addon-api@8.3.1\node_modules\node-addon-api\node_addon_api_except.vcxproj">
-      <Project>{CD5436C2-0AB2-2F99-C479-7DDA95FC3644}</Project>
+      <Project>{17B26AE0-E18B-6D82-F206-2D5795525725}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
