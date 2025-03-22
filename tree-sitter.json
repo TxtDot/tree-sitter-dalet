@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "dalet",
+      "camelcase": "Dalet",
+      "title": "Dalet",
+      "scope": "source.dalet",
+      "file-types": [
+        "dtss",
+        "dtml"
+      ],
+      "injection-regex": "^dalet$",
+      "class-name": "TreeSitterDalet"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "Markup language ecosystem сombining small file size, big number of possibilities for describing the interface and readability.",
+    "authors": [
+      {
+        "name": "artegoser",
+        "email": "me@artegoser.ru",
+        "url": "https://artegoser.ru/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/TxtDot/dalet"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

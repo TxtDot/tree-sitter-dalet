@@ -1,2 +1,3 @@
-# daleth-tree-sitter
-Tree sitter grammar for daleth
+# dalet-tree-sitter
+
+Tree sitter grammar for dalet

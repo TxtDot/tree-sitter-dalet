@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-daleth",
+  "name": "tree-sitter-dalet",
   "version": "1.0.0",
-  "description": "Tree-sitter parser for daleth",
+  "description": "Tree-sitter parser for dalet",
   "main": "index.js",
   "types": "bindings/node",
   "scripts": {
@@ -21,13 +21,13 @@
     "src/**"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "node-addon-api": "^7.1.0",
+    "node-addon-api": "^8.3.1",
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.22.4"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -35,17 +35,13 @@
     }
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.22.6",
-    "prebuildify": "^6.0.0"
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.25.3"
   },
-  "tree-sitter": [
-    {
-      "highlights": "queries/highlights.scm",
-      "scope": "source.daleth",
-      "file-types": [
-        "dlth"
-      ],
-      "injection-regex": "^daleth$"
-    }
-  ]
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "tree-sitter",
+      "tree-sitter-cli"
+    ]
+  }
 }

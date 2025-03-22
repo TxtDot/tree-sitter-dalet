@@ -1,5 +1,6 @@
 {
-  "name": "daleth",
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "dalet",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -63,13 +64,8 @@
       ]
     },
     "empty_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\n\\s*\\n"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "\\n\\s*\\n"
     },
     "el_tags": {
       "type": "SEQ",
@@ -758,5 +754,6 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

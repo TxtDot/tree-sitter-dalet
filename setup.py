@@ -9,7 +9,7 @@ from wheel.bdist_wheel import bdist_wheel
 class Build(build):
     def run(self):
         if isdir("queries"):
-            dest = join(self.build_lib, "tree_sitter_YOUR_LANGUAGE_NAME", "queries")
+            dest = join(self.build_lib, "tree_sitter_dalet", "queries")
             self.copy_tree("queries", dest)
         super().run()
 
@@ -26,35 +26,36 @@ setup(
     packages=find_packages("bindings/python"),
     package_dir={"": "bindings/python"},
     package_data={
-        "tree_sitter_your_language_name": ["*.pyi", "py.typed"],
-        "tree_sitter_your_language_name.queries": ["*.scm"],
+        "tree_sitter_dalet": ["*.pyi", "py.typed"],
+        "tree_sitter_dalet.queries": ["*.scm"],
     },
-    ext_package="tree_sitter_your_language_name",
+    ext_package="tree_sitter_dalet",
     ext_modules=[
         Extension(
             name="_binding",
             sources=[
-                "bindings/python/tree_sitter_your_language_name/binding.c",
+                "bindings/python/tree_sitter_dalet/binding.c",
                 "src/parser.c",
                 # NOTE: if your language uses an external scanner, add it here.
             ],
-            extra_compile_args=[
-                "-std=c11",
-            ] if system() != "Windows" else [
-                "/std:c11",
-                "/utf-8",
-            ],
+            extra_compile_args=(
+                [
+                    "-std=c11",
+                ]
+                if system() != "Windows"
+                else [
+                    "/std:c11",
+                    "/utf-8",
+                ]
+            ),
             define_macros=[
                 ("Py_LIMITED_API", "0x03080000"),
-                ("PY_SSIZE_T_CLEAN", None)
+                ("PY_SSIZE_T_CLEAN", None),
             ],
             include_dirs=["src"],
             py_limited_api=True,
         )
     ],
-    cmdclass={
-        "build": Build,
-        "bdist_wheel": BdistWheel
-    },
-    zip_safe=False
+    cmdclass={"build": Build, "bdist_wheel": BdistWheel},
+    zip_safe=False,
 )

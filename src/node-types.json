@@ -102,11 +102,6 @@
     }
   },
   {
-    "type": "empty_line",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "number_argument",
     "named": true,
     "fields": {}
@@ -114,6 +109,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -360,6 +356,10 @@
   {
     "type": "el",
     "named": false
+  },
+  {
+    "type": "empty_line",
+    "named": true
   },
   {
     "type": "escape",

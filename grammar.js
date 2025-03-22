@@ -1,8 +1,14 @@
+/**
+ * @file Markup language ecosystem сombining small file size, big number of possibilities for describing the interface and readability.
+ * @author artegoser me@artegoser.ru
+ * @license MIT
+ */
+
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
 module.exports = grammar({
-  name: "daleth",
+  name: "dalet",
 
   rules: {
     source_file: ($) => repeat($._token),
@@ -17,17 +23,17 @@ module.exports = grammar({
         $.argument,
         $.textual,
         $.text_tag,
-        $.code,
+        $.code
       ),
 
     comment: ($) => seq("#", /[^\n]*/),
-    empty_line: ($) => seq(/\n\s*\n/),
+    empty_line: ($) => /\n\s*\n/,
 
     el_tags: ($) =>
       seq(
         alias("[[", $.symbol_open),
         repeat($._token),
-        alias("]]", $.symbol_close),
+        alias("]]", $.symbol_close)
       ),
     tags_body: ($) =>
       seq(alias("[", $.symbol), repeat($._token), alias("]", $.symbol_close)),
@@ -66,7 +72,7 @@ module.exports = grammar({
         "carousel",
         "code",
         "pre",
-        "meta",
+        "meta"
       ),
 
     argument: ($) => choice($.number_argument, $.text_argument),
@@ -81,12 +87,12 @@ module.exports = grammar({
             choice(
               token.immediate(/[^"\\\n]/), // Match any character except quotes and backslashes
               alias("\\\\", $.escape), // Match escaped backslashes
-              alias('\\"', $.escape), // Match escaped quotes
-            ),
+              alias('\\"', $.escape) // Match escaped quotes
+            )
           ),
-          $.text_argument_value,
+          $.text_argument_value
         ),
-        '"',
+        '"'
       ),
 
     textual: ($) =>
@@ -96,7 +102,7 @@ module.exports = grammar({
         $._mlmstext,
         $._rmltext,
         $._mltext,
-        $._text_body,
+        $._text_body
       ),
 
     _table_syntax: ($) =>
@@ -108,12 +114,12 @@ module.exports = grammar({
             choice(
               token.immediate(/[^}\\]/), // Match any character except } and \
               alias("\\\\", $.escape), // Match escaped backslashes
-              alias("\\}", $.escape), // Match escaped }
-            ),
+              alias("\\}", $.escape) // Match escaped }
+            )
           ),
-          $.textual_value,
+          $.textual_value
         ),
-        alias("}", $.symbol_close),
+        alias("}", $.symbol_close)
       ),
 
     _paragraph: ($) =>
@@ -124,12 +130,12 @@ module.exports = grammar({
             choice(
               token.immediate(/[^}\\]/), // Match any character except } and \
               alias("\\\\", $.escape), // Match escaped backslashes
-              alias("\\}", $.escape), // Match escaped }
-            ),
+              alias("\\}", $.escape) // Match escaped }
+            )
           ),
-          $.textual_value,
+          $.textual_value
         ),
-        alias("}", $.symbol_close),
+        alias("}", $.symbol_close)
       ),
 
     _mlmstext: ($) =>
@@ -141,12 +147,12 @@ module.exports = grammar({
             choice(
               token.immediate(/[^}\\]/), // Match any character except } and \
               alias("\\\\", $.escape), // Match escaped backslashes
-              alias("\\}", $.escape), // Match escaped }
-            ),
+              alias("\\}", $.escape) // Match escaped }
+            )
           ),
-          $.textual_value,
+          $.textual_value
         ),
-        alias("}", $.symbol_close),
+        alias("}", $.symbol_close)
       ),
 
     _rmltext: ($) =>
@@ -157,12 +163,12 @@ module.exports = grammar({
             choice(
               token.immediate(/[^}\\]/), // Match any character except } and \
               alias("\\\\", $.escape), // Match escaped backslashes
-              alias("\\}", $.escape), // Match escaped }
-            ),
+              alias("\\}", $.escape) // Match escaped }
+            )
           ),
-          $.textual_value,
+          $.textual_value
         ),
-        alias("}", $.symbol_close),
+        alias("}", $.symbol_close)
       ),
 
     _mltext: ($) =>
@@ -173,12 +179,12 @@ module.exports = grammar({
             choice(
               token.immediate(/[^}\\]/), // Match any character except } and \
               alias("\\\\", $.escape), // Match escaped backslashes
-              alias("\\}", $.escape), // Match escaped }
-            ),
+              alias("\\}", $.escape) // Match escaped }
+            )
           ),
-          $.textual_value,
+          $.textual_value
         ),
-        alias("}", $.symbol_close),
+        alias("}", $.symbol_close)
       ),
 
     _text_body: ($) =>

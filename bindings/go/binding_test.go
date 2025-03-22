@@ -1,15 +1,15 @@
-package tree_sitter_daleth_test
+package tree_sitter_dalet_test
 
 import (
 	"testing"
 
-	tree_sitter "github.com/smacker/go-tree-sitter"
-	"github.com/tree-sitter/tree-sitter-daleth"
+	tree_sitter "github.com/tree-sitter/go-tree-sitter"
+	tree_sitter_dalet "github.com/txtdot/dalet/bindings/go"
 )
 
 func TestCanLoadGrammar(t *testing.T) {
-	language := tree_sitter.NewLanguage(tree_sitter_daleth.Language())
+	language := tree_sitter.NewLanguage(tree_sitter_dalet.Language())
 	if language == nil {
-		t.Errorf("Error loading Daleth grammar")
+		t.Errorf("Error loading Dalet grammar")
 	}
 }
